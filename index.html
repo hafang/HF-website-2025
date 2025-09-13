@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>✨HAOLIN FANG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-trail"></div>
+    
+    <!-- Navigation Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo" id="logo">
+                HAOLIN FANG
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link" data-page="home">canvas</a>
+                <a href="#work" class="nav-link" data-page="work">work</a>
+                <a href="#about" class="nav-link" data-page="about">about</a>
+            </div>
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </nav>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#home" class="mobile-nav-link" data-page="home">canvas</a>
+            <a href="#work" class="mobile-nav-link" data-page="work">work</a>
+            <a href="#about" class="mobile-nav-link" data-page="about">about</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="canvas-container">
+                <canvas id="particleCanvas" class="particle-canvas"></canvas>
+                <div class="canvas-welcome">
+                    <h2 class="welcome-title">Welcome to my little playground</h2>
+                    <p class="welcome-subtitle">This space evolves and surprises — come back often!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Page -->
+        <section id="work" class="page">
+            <div class="work-container">
+                <div class="work-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="ar">AR</button>
+                    <button class="filter-btn" data-filter="vr">VR</button>
+                    <button class="filter-btn" data-filter="other">Other</button>
+                </div>
+                <div class="work-grid">
+                    <div class="project-item" data-category="ar" data-project="meta-dior">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <img src="images/thumbnails/dior_thumb01.jpg" alt="Meta x Dior" class="project-image">
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">Dior | The Atelier of Dreams</h3>
+                            <p class="project-subtitle">Spark AR Studio, JavaScript, GLSL</p>
+                        </div>
+                    </div>
+                    <div class="project-item" data-category="ar" data-project="meta-fendi">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <img src="images/thumbnails/fendi_thumb01.png" alt="Meta x Fendi" class="project-image">
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">Fendi | Faster</h3>
+                            <p class="project-subtitle">Spark AR Studio, JavaScript, GLSL</p>
+                        </div>
+                    </div>
+                    <div class="project-item" data-category="ar" data-project="meta-tiffany">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <img src="images/thumbnails/tiffany_thumb01.png" alt="Meta x Tiffany & Co." class="project-image">
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">Tiffany & Co. | The Landmark</h3>
+                            <p class="project-subtitle">Spark AR Studio, JavaScript, Patch Editor</p>
+                        </div>
+                    </div>
+
+                    <div class="project-item" data-category="vr" data-project="dream-stream">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <img src="images/thumbnails/dreamstream_thumb02.png" alt="Dream Stream" class="project-image">
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">Dream Stream</h3>
+                            <p class="project-subtitle">Unity, C#, WebGL, Interactive Design</p>
+                        </div>
+                    </div>
+                    <div class="project-item" data-category="vr" data-project="renderball">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <img src="images/thumbnails/renderball_thumb01.png" alt="Dream Stream" class="project-image">
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">Renderball - MSG Sphere Visualizer</h3>
+                            <p class="project-subtitle">Unity, C#, Real-time Rendering, LED Mapping</p>
+                        </div>
+                    </div>
+
+                    <div class="project-item" data-category="vr" data-project="buck-altspace">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <img src="images/thumbnails/altspace_thumb01.png" alt="BUCK VR Holiday Party" class="project-image">
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">BUCK VR Holiday Party 2021</h3>
+                            <p class="project-subtitle">Unity, C#, VR SDK, 3D Animation</p>
+                        </div>
+                    </div>
+                    <div class="project-item" data-category="other" data-project="roblox-phaserider">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <img src="images/thumbnails/phaserider_thumb01.png" alt="Roblox Phaserider Demo" class="project-image">
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">Roblox Phaserider Demo</h3>
+                            <p class="project-subtitle">Roblox Studio, Lua, 3D Design</p>
+                        </div>
+                    </div>
+
+                    <div class="project-item" data-category="ar" data-project="tokyo-olympics">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <img src="images/thumbnails/tokyo2020_thumb01.png" alt="Tokyo Olympics 2020" class="project-image">
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">Tokyo Olympics 2020</h3>
+                            <p class="project-subtitle">Spark AR Studio, JavaScript, Motion Graphics</p>
+                        </div>
+                    </div>
+                    <div class="project-item" data-category="ar" data-project="ups-aapi">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <img src="images/thumbnails/upsAAPI_thumb01.png" alt="UPS AAPI Month 2023" class="project-image">
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">UPS AAPI Month 2023</h3>
+                            <p class="project-subtitle">Spark AR Studio, JavaScript, Cultural Design</p>
+                        </div>
+                    </div>
+                    <div class="project-item" data-category="ar" data-project="meta-fitXR">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <img src="images/thumbnails/fitxr_thumb01.png" alt="Meta x Fitness XR" class="project-image">
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">Meta x Fitness XR</h3>
+                            <p class="project-subtitle">Spark AR Studio, JavaScript, Body Tracking</p>
+                        </div>
+                    </div>
+                    <div class="project-item" data-category="ar" data-project="buck-lny">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <img src="images/thumbnails/lny_thumb02.png" alt="BUCK x LNY 2023" class="project-image">
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">BUCK x LNY 2023</h3>
+                            <p class="project-subtitle">Spark AR Studio, JavaScript, Particle Systems</p>
+                        </div>
+                    </div>
+                    <div class="project-item" data-category="ar" data-project="spark-ar">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <img src="images/thumbnails/meta_spark.png" alt="Various Spark AR Effects" class="project-image">
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">Various Spark AR Effects</h3>
+                            <p class="project-subtitle">Spark AR Studio, JavaScript, GLSL</p>
+                        </div>
+                    </div>
+                    <div class="project-item" data-category="ar" data-project="snap-ar">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <img src="images/thumbnails/snap_lens.png" alt="Snap AR Effects" class="project-image">
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">Snapchat AR Effects</h3>
+                            <p class="project-subtitle">Lens Studio, JavaScript</p>
+                        </div>
+                    </div>
+
+                    <!-- Special Projects 
+                    <div class="project-item" data-category="vr" data-project="yugalabs-takeoff">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <div class="thumbnail-placeholder">
+                                <span>Virtual Puppetry</span>
+                            </div>
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">Buck x Yuga Labs</h3>
+                            <p class="project-subtitle">Unity, C#, Real-time Rendering, LED Mapping</p>
+                        </div>
+                    </div>
+                    <div class="project-item" data-category="vr" data-project="yugalabs-takeoff">
+                        <div class="project-thumbnail clickable-thumbnail">
+                            <div class="thumbnail-placeholder">
+                                <span>Virtual Puppetry</span>
+                            </div>
+                        </div>
+                        <div class="project-info clickable-info">
+                            <h3 class="project-title">Buck x Yuga Labs</h3>
+                            <p class="project-subtitle">Unity, C#, Real-time Rendering, LED Mapping</p>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Detail Page -->
+        <section id="project-detail" class="page">
+            <div class="project-detail-container">
+                <button class="back-button" id="back-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15,18 9,12 15,6"></polyline>
+                    </svg>
+                    Back to Work
+                </button>
+                
+                <div class="project-detail-content">
+                    <header class="project-header">
+                        <h1 class="project-detail-title" id="project-detail-title"></h1>
+                        <p class="project-detail-subtitle" id="project-detail-subtitle"></p>
+                    </header>
+                    
+                    <div class="project-description" id="project-description"></div>
+                    
+                    <div class="project-hero-image">
+                        <img id="project-hero-img" alt="" class="hero-image">
+                    </div>
+                    
+                    <div class="project-extended-description" id="project-extended-description"></div>
+                    
+                    <div class="project-gallery">
+                        <div class="gallery-image">
+                            <img id="project-gallery-img1" alt="" class="gallery-image-item">
+                        </div>
+                        <div class="gallery-image">
+                            <img id="project-gallery-img2" alt="" class="gallery-image-item">
+                        </div>
+                    </div>
+                    
+                    <div class="project-credits">
+                        <div class="credits-content" id="project-credits-content"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about" class="page">
+            <div class="about-container">
+                <div class="about-layout">
+                    <div class="about-image">
+                        <div class="profile-image-placeholder">
+                            <img src="images/about_haolin.jpg" alt="Haolin Fang - Creative Technologist" class="profile-image">
+                        </div>
+                    </div>
+                    <div class="about-content">
+                        <h2 class="about-title">/ˈhaʊ.lɪn fæŋ/</h2>
+                        <p class="about-text">
+                            Hello! I'm Haolin, a Creative Technologist weaving together design and code from the vibrant Bay Area. 
+                            My spunky calico companion, Lumi, keeps me company during late night coding sessions. 
+                        </p>
+                        <p class="about-text">
+                            I'm passionate about the intersection where creativity meets technology. I craft interactive experiences that don't just engage, 
+                            but invite everyone to participate. My work lives at the crossroads of artistry and accessibility. 
+                            Every line of code becomes a bridge to more inclusive digital worlds.
+                        </p>
+                        <p class="about-text">
+                            Ready to collaborate and bring something extraordinary to life? Let's connect!
+                        </p>
+                        <div class="social-icons">
+                            <a href="https://www.linkedin.com/in/haolin-fang-97451a98/" class="social-icon" target="_blank" rel="noopener noreferrer">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                            <a href="mailto:haolinfang97@gmail.com" class="social-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636C.732 21.003 0 20.271 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h.65L12 12.267l9.714-8.446h.65C23.268 3.821 24 4.553 24 5.457z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <!-- <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">Haolin Fang © 2019-2025 - All rights reserved</p>
+        </div>
+    </footer> -->
+
+    <script src="projectData.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
