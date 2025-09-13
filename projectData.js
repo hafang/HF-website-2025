@@ -316,34 +316,27 @@ const PROJECT_DATA = {
         sections: [
             {
                 id: 'fortune-luck-love',
-                title: 'Week 1 & 2 | 🍀 Luck & ❤️ Love Fortunes',
+                title: 'Year of the Rabbit Fortunes',
                 content: ``,
                 media: [
                     {
-                        type: 'gif',
-                        src: 'gifs/buck_lny2023/LNY23_AR_Week01_Wes.gif',
+                        type: 'mp4',
+                        src: 'videos/lny/LNY23_AR_Week01_Wes.mp4',
                         caption: ''
                     },
                     {
-                        type: 'gif',
-                        src: 'gifs/buck_lny2023/LNY23_AR_Week02_Ken.gif',
-                        caption: ''
-                    }
-                ]
-            },
-            {
-                id: 'fortune-wealth-health',
-                title: 'Week 3 & 4 | 💰 Wealth and 💪 Health Fortunes',
-                content: ``,
-                media: [
-                    {
-                        type: 'gif',
-                        src: 'gifs/buck_lny2023/LNY23_AR_Week03_Soyeon.gif',
+                        type: 'mp4',
+                        src: 'videos/lny/LNY23_AR_Week02_Ken.mp4',
                         caption: ''
                     },
                     {
-                        type: 'gif',
-                        src: 'gifs/buck_lny2023/LNY23_AR_Week04_Vik.gif',
+                        type: 'mp4',
+                        src: 'videos/lny/LNY23_AR_Week03_Soyeon.mp4',
+                        caption: ''
+                    },
+                    {
+                        type: 'mp4',
+                        src: 'videos/lny/LNY23_AR_Week04_Vik.mp4',
                         caption: ''
                     }
                 ]
@@ -1180,7 +1173,12 @@ const PROJECT_DATA = {
         While most of my projects are made in Meta Spark AR Studio, I've also explored other AR platforms like Snap Lens Studio.
         </p>
         `,
-        heroImage: null,
+        heroImage: 
+        {
+            type: 'image',
+            src: 'images/thumbnails/snap_ls.png',
+            caption: 'Snap AR Effects'
+        },
         sections: [
             {
                 id: 'gallery',

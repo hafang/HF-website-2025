@@ -76,6 +76,34 @@ body {
 /* Hide scrollbars */
 ::-webkit-scrollbar { display: none; }
 
+/* Footer */
+.footer {
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border);
+    padding: var(--spacing-sm) 0;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl);
+    text-align: center;
+}
+
+.footer-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-regular);
+    margin: 0;
+    opacity: 0.8;
+    transition: opacity var(--transition-medium);
+}
+
+.footer-text:hover {
+    opacity: 1;
+}
+
 /* Page Layout */
 #work.active { overflow-y: auto; }
 #home.active, #about.active { overflow: hidden; }
@@ -301,8 +329,9 @@ body {
     position: relative;
     width: 100%;
     max-width: 1200px;
-    height: calc(100vh - 200px);
+    height: calc(90vh - 180px);
     margin: 0 auto;
+    margin-top: var(--spacing-lg);
     padding: var(--spacing-xl);
     background: var(--bg-secondary);
     border: 1px solid var(--border);
@@ -586,6 +615,7 @@ body {
     padding: var(--spacing-xl);
     max-width: 1000px;
     margin: 0 auto;
+    margin-top: calc(var(--spacing-xl) * 2);
     display: flex;
     align-items: flex-start;
     min-height: calc(100vh - 120px);
@@ -1082,23 +1112,31 @@ body {
     border-radius: 16px !important;
 }
 
-/* Buck-lny Project - Side by Side Layout for GIFs */
-.project-detail-container[data-project="buck-lny"] .section-media:has(.media-gif:nth-child(2)) {
+/* Buck-lny Project - 2x2 Grid Layout for 4 GIFs */
+.project-detail-container[data-project="buck-lny"] .section-media.multiple-gifs:not(.has-videos) {
     display: grid !important;
-    grid-template-columns: auto auto !important;
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: var(--spacing-lg) !important;
     max-width: 800px !important;
     margin: 0 auto !important;
     justify-content: center !important;
 }
 
-.project-detail-container[data-project="buck-lny"] .section-media:has(.media-gif:nth-child(2)) .media-item {
+.project-detail-container[data-project="buck-lny"] .section-media.multiple-gifs .media-item {
     max-width: 100% !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-.project-detail-container[data-project="buck-lny"] .section-media:has(.media-gif:nth-child(2)) .media-gif {
-    max-width: 100% !important;
+.project-detail-container[data-project="buck-lny"] .section-media.multiple-gifs .media-item:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.project-detail-container[data-project="buck-lny"] .section-media.multiple-gifs .media-gif {
+    width: 100% !important;
     height: auto !important;
+    max-width: 100% !important;
     object-fit: contain !important;
     border-radius: 16px !important;
 }
@@ -1361,7 +1399,7 @@ body {
     
     .canvas-container {
         width: 100%;
-        height: calc(100vh - 160px - env(safe-area-inset-top));
+        height: calc(90vh - 144px - env(safe-area-inset-top));
         border-radius: 12px;
     }
     
@@ -1518,12 +1556,11 @@ body {
         gap: var(--spacing-md) !important;
     }
 
-    /* Buck-lny Project Mobile - Stack vertically */
-    .project-detail-container[data-project="buck-lny"] .section-media:has(.media-gif:nth-child(2)) {
-        display: block !important;
-        grid-template-columns: none !important;
+    /* Buck-lny Project Mobile - 2 column grid */
+    .project-detail-container[data-project="buck-lny"] .section-media.multiple-gifs:not(.has-videos) {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: var(--spacing-sm) !important;
         max-width: 100% !important;
-        gap: var(--spacing-md) !important;
     }
 
     /* Tiffany Demo Video Mobile - Smaller size */

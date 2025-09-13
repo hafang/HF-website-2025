@@ -343,8 +343,12 @@ class NavigationSystem {
         this.updatePageVisibility(page);
         this.updateNavigation(page);
         this.managePersistentSparkles(page);
-        this.scrollToTop();
         this.manageBodyScroll(page);
+        
+        // Delay scroll to top to avoid layout shift
+        setTimeout(() => {
+            this.scrollToTop();
+        }, 0);
         
         this.currentPage = page;
 
@@ -766,6 +770,19 @@ class ProjectDetailSystem {
                         mediaContainer.classList.add('single-image');
                     } else if (imageCount >= 2) {
                         mediaContainer.classList.add('multiple-images');
+                    }
+                }
+                
+                // Check if section has GIFs and add appropriate class
+                const hasGifs = section.media.some(media => media.type === 'gif');
+                const gifCount = section.media.filter(media => media.type === 'gif').length;
+                
+                if (hasGifs) {
+                    mediaContainer.classList.add('has-gifs');
+                    if (gifCount === 1) {
+                        mediaContainer.classList.add('single-gif');
+                    } else if (gifCount >= 2) {
+                        mediaContainer.classList.add('multiple-gifs');
                     }
                 }
                 
