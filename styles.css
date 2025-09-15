@@ -413,57 +413,7 @@ body {
     margin-top: calc(var(--spacing-xl) * 2);
 }
 
-.work-filters {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    margin-bottom: calc(var(--spacing-xl));
-    padding: var(--spacing-sm);
-    background: var(--bg-primary);
-    backdrop-filter: blur(20px);
-    border-radius: 12px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-}
 
-[data-theme="dark"] .work-filters {
-    box-shadow: 
-        0 2px 15px rgba(0, 0, 0, 0.3),
-        0 0 20px rgba(255, 255, 255, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.filter-btn {
-    padding: var(--spacing-xs) var(--spacing-md);
-    background: transparent;
-    border: none;
-    border-radius: 8px;
-    color: var(--text-secondary);
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-medium);
-    font-size: 0.95rem;
-    letter-spacing: -0.3px;
-    cursor: pointer;
-    transition: all var(--transition-medium);
-    position: relative;
-}
-
-.filter-btn:hover { color: var(--text-primary); }
-.filter-btn.active { color: var(--text-primary); }
-
-.filter-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 2px;
-    background: var(--accent);
-    border-radius: 1px;
-}
 
 .work-grid {
     display: grid;
@@ -472,35 +422,23 @@ body {
     margin-top: var(--spacing-lg);
 }
 
+
 .project-item {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     animation: fadeIn 0.6s ease-out;
-    transition: opacity var(--transition-medium);
+    transition: all var(--transition-medium);
+    transform-origin: center;
 }
 
-/* AR projects take 2 columns (1:1 aspect ratio) */
-.project-item[data-category="ar"] {
+/* All projects use the same grid span for uniform sizing */
+.project-item {
     grid-column: span 2;
 }
 
-/* VR and Other projects take 3 columns (16:9 aspect ratio) */
-.project-item[data-category="vr"],
-.project-item[data-category="other"] {
-    grid-column: span 3;
-}
 
-.project-item.filtered-out {
-    opacity: 0;
-    transform: scale(0.8);
-    pointer-events: none;
-}
 
-.project-item.show-animation {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
 
 /* Clickable elements */
 .clickable-thumbnail,
@@ -543,21 +481,15 @@ body {
     padding: 0.25rem 0;
 }
 
-/* AR thumbnails keep square aspect ratio */
-.project-item[data-category="ar"] .project-thumbnail {
-    aspect-ratio: 1;
-}
-
-/* VR and Other thumbnails use 16:9 aspect ratio */
-.project-item[data-category="vr"] .project-thumbnail,
-.project-item[data-category="other"] .project-thumbnail {
-    height: 0;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
+/* All thumbnails: consistent square sizing */
+.project-item .project-thumbnail {
+    height: 0 !important;
+    padding-bottom: 100% !important; /* 1:1 square aspect ratio */
     position: relative;
+    aspect-ratio: 1/1 !important; /* Square aspect ratio */
 }
 
-.project-item[data-category="vr"] .thumbnail-placeholder,
-.project-item[data-category="other"] .thumbnail-placeholder {
+.project-item .thumbnail-placeholder {
     position: absolute;
     top: 0;
     left: 0;
@@ -565,8 +497,7 @@ body {
     height: 100%;
 }
 
-.project-item[data-category="vr"] .project-image,
-.project-item[data-category="other"] .project-image {
+.project-item .project-image {
     position: absolute;
     top: 0;
     left: 0;
@@ -795,6 +726,18 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes slideInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
 @keyframes sparkleAnimation {
     0% { opacity: 0; transform: scale(0) rotate(0deg); }
     20% { opacity: 1; transform: scale(1) rotate(45deg); }
@@ -830,25 +773,37 @@ body {
 }
 
 .back-button {
-    display: flex;
+    position: fixed;
+    top: var(--spacing-lg);
+    left: var(--spacing-lg);
+    z-index: 1000;
+    display: none; /* Hidden by default */
     align-items: center;
     gap: var(--spacing-xs);
-    background: none;
+    background: var(--bg-primary);
     border: 1px solid var(--border);
     color: var(--text-primary);
     font-family: var(--font-family);
     font-size: 0.9rem;
     font-weight: var(--font-weight-medium);
-    padding: var(--spacing-xs) var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
     border-radius: 24px;
     cursor: pointer;
-    margin-bottom: var(--spacing-xl);
     transition: all var(--transition-fast);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    animation: slideInFromLeft 0.4s ease-out;
+}
+
+/* Show back button only on project detail page */
+#project-detail .back-button {
+    display: flex;
 }
 
 .back-button:hover {
     background: var(--bg-secondary);
     transform: translateX(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .back-button svg {
@@ -861,6 +816,7 @@ body {
 
 .project-detail-content {
     animation: fadeIn 0.6s ease-out;
+    padding-top: 80px; /* Space for floating back button */
 }
 
 .project-header {
@@ -1411,16 +1367,20 @@ body {
     .work-container,
     .about-container { padding: var(--spacing-md); }
     
-    .work-filters {
-        flex-wrap: wrap;
-        gap: var(--spacing-xs);
-        top: calc(60px + env(safe-area-inset-top));
+    .back-button {
+        top: var(--spacing-md);
+        left: var(--spacing-md);
+        right: var(--spacing-md);
+        width: auto;
+        justify-content: center;
+        padding: var(--spacing-sm) var(--spacing-lg);
+        font-size: 0.95rem;
     }
     
-    .filter-btn {
-        font-size: 0.9rem;
-        padding: var(--spacing-xs) var(--spacing-sm);
+    .project-detail-content {
+        padding-top: 70px; /* Reduced space for mobile floating back button */
     }
+    
     
     .about-layout {
         flex-direction: column;
@@ -1441,16 +1401,17 @@ body {
         gap: var(--spacing-lg);
     }
     
-    /* On mobile, all projects take full width */
-    .project-item[data-category="ar"],
-    .project-item[data-category="vr"],
-    .project-item[data-category="other"] {
+    /* On mobile, all projects take full width - uniform sizing */
+    .project-item {
         grid-column: span 1;
     }
     
-    /* All thumbnails use 16:9 on mobile for consistency */
-    .project-item[data-category="ar"] .project-thumbnail {
-        aspect-ratio: 16/9;
+    /* All thumbnails: consistent square aspect ratio on mobile */
+    .project-item .project-thumbnail {
+        height: 0 !important;
+        padding-bottom: 100% !important; /* 1:1 square aspect ratio */
+        position: relative;
+        aspect-ratio: 1/1 !important; /* Square aspect ratio */
     }
     
     .about-title {
@@ -1648,14 +1609,9 @@ body {
 @media (max-width: 1024px) and (min-width: 769px) {
     .work-grid { grid-template-columns: repeat(4, 1fr); }
     
-    /* Tablet: AR projects take 2 columns, VR/Other take full width */
-    .project-item[data-category="ar"] {
+    /* Tablet: all projects take 2 columns for uniform sizing */
+    .project-item {
         grid-column: span 2;
-    }
-    
-    .project-item[data-category="vr"],
-    .project-item[data-category="other"] {
-        grid-column: span 4;
     }
 }
 

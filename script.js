@@ -413,55 +413,6 @@ class NavigationSystem {
     }
 }
 
-// Work Filter System
-class WorkFilterSystem {
-    constructor() {
-        this.elements = {
-            filterButtons: document.querySelectorAll('.filter-btn'),
-            projectItems: document.querySelectorAll('.project-item')
-        };
-        this.activeFilter = 'all';
-        this.init();
-    }
-
-    init() {
-        this.elements.filterButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                const filter = e.target.getAttribute('data-filter');
-                this.setActiveFilter(filter);
-                this.filterProjects(filter);
-            });
-        });
-    }
-
-    setActiveFilter(filter) {
-        this.activeFilter = filter;
-        this.elements.filterButtons.forEach(button => {
-            button.classList.toggle('active', button.getAttribute('data-filter') === filter);
-        });
-    }
-
-    filterProjects(filter) {
-        // Use live NodeList to get current elements
-        const projectItems = document.querySelectorAll('.project-item');
-        
-        projectItems.forEach((item, index) => {
-            const category = item.getAttribute('data-category');
-            const shouldShow = filter === 'all' || category === filter;
-            
-            // Reset styles
-            item.style.cssText = '';
-            
-            if (shouldShow) {
-                item.classList.remove('filtered-out');
-                setTimeout(() => item.classList.add('show-animation'), index * 50);
-            } else {
-                item.classList.remove('show-animation');
-                item.classList.add('filtered-out');
-            }
-        });
-    }
-}
 
 // Project Detail System
 class ProjectDetailSystem {
@@ -654,6 +605,9 @@ class ProjectDetailSystem {
                 } else if (typeof project.heroImage === 'string') {
                     // Handle legacy string format
                     elements.heroContainer.innerHTML = `<img id="project-hero-img" alt="${project.title}" class="hero-image" src="${project.heroImage}">`;
+                } else if (typeof project.heroImage === 'object' && project.heroImage.src) {
+                    // Handle single object format
+                    elements.heroContainer.innerHTML = `<img id="project-hero-img" alt="${project.heroImage.caption || project.title}" class="hero-image" src="${project.heroImage.src}">`;
                 } else {
                     this.createHeroPlaceholder(elements.heroContainer, project);
                 }
@@ -1045,7 +999,6 @@ class App {
             themeManager: new ThemeManager(),
             cursorEffects: new CursorEffects(),
             navigationSystem: null,
-            workFilterSystem: new WorkFilterSystem(),
             projectDetailSystem: null,
             interactiveAnimations: new InteractiveAnimations(),
             canvasSystem: null

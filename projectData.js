@@ -684,7 +684,7 @@ const PROJECT_DATA = {
         title: 'Roblox Phaserider Demo',
         subtitle: 'Roblox Studio',
         description: `<h3>Experimenting with Roblox Studio</h3>
-        <p>As an effort to explore Roblox Studio andrevive some old assets from a previous Buck game, Phaserider, I created a demo of the world where users can openly explore in. Roblox studio was 
+        <p>As an effort to explore Roblox Studio and revive some old assets from a previous Buck game, Phaserider, I created a demo of the world where users can openly explore in. Roblox studio was 
         a new tool for us to develop multiplayer experiences on and was a very accessible platform for others to join in on the fun.</p>
         
         <p>
@@ -1209,6 +1209,52 @@ const PROJECT_DATA = {
             }
         ],
         credits: 'Year: 2019-2025<br>Platform: Snap Lens Studio<br>Role: Lead Creative Technologist, AR Developer'
+    },
+
+    'flat-journal': {
+        title: 'Flat Journal',
+        subtitle: 'Website, JavaScript',
+        description: `
+        <p>
+        FLAT is a platform for theoretical and critical texts, interviews, reviews, projects, and experiments that engage with contemporary conversations surrounding emerging media in the arts. FLAT is open to submissions of writing, images, video, interactive works, and almost any possible form of web-based content from writers, artists, and thinkers around the world. Please see open calls for specific information about what themes and media we are accepting at this time. Contributors to FLAT include theorists, technologists, and artists from the UCLA community, the greater Los Angeles area, and beyond. FLAT was founded in 2018 and is designed, curated, and produced by faculty, graduate and undergraduate students, and alumnx from UCLA’s department of Design Media Arts.
+        </p>
+
+        <p>
+        FLAT is made possible through the support of the UCLA Department of Design Media Arts and the UCLA Arts Conditional Studio.
+        </p>
+        `,
+        heroImage: 
+        {
+            type: 'image',
+            src: 'images/thumbnails/flat2025.png',
+            caption: ''
+        },
+        sections: [
+            {
+                id: 'role',
+                title: 'A Collaboration Between Students and Faculty',
+                content: `
+                <p>
+                During my final year at UCLA, I collaborated with UCLA Design Media Arts faculty and students to design and develop a website for Flat Journal, 
+                a platform for theoretical and critical texts, interviews, reviews, projects, and experiments that engage with contemporary conversations surrounding emerging media in the arts.
+                As the lead UI/UX designer and web developer, I was responsible for designing the website's wireframes, 
+                as well as an initial working prototype for the website.
+                </p>
+
+                <p>
+                The website went through multiple iterations and revisions, with the final design being approved by my mentor and founding Editor, Chandler McWilliams.
+                </p>
+                `,
+                media: [
+                    {
+                        type: 'gif',
+                        src: 'images/thumbnails/final_site_00.gif',
+                        caption: ''
+                    }
+                ]
+            }
+        ],
+        credits: 'Year: 2019<br>Role: Lead UI/UX Designer, Web Developer, Creative Direction'
     }
 };
 
@@ -1224,35 +1270,6 @@ const ProjectDataHelpers = {
         return Object.keys(PROJECT_DATA);
     },
 
-    // Get projects by category (based on project ID patterns)
-    getProjectsByCategory(category) {
-        const projects = {};
-        Object.entries(PROJECT_DATA).forEach(([id, project]) => {
-            const projectCategory = this.detectCategory(project, id);
-            if (projectCategory === category || category === 'all') {
-                projects[id] = project;
-            }
-        });
-        return projects;
-    },
-
-    // Detect category based on project content
-    detectCategory(project, projectId) {
-        const subtitle = project.subtitle.toLowerCase();
-        
-        // Special case: Spark AR portfolio should be "other" category
-        if (projectId === 'spark-ar') {
-            return 'other';
-        }
-        
-        if (subtitle.includes('spark ar') || subtitle.includes('lens studio')) {
-            return 'ar';
-        } else if (subtitle.includes('unity') || subtitle.includes('vr') || subtitle.includes('webgl')) {
-            return 'vr';
-        } else {
-            return 'other';
-        }
-    },
 
     // Get projects with missing images (for maintenance)
     getProjectsWithMissingImages() {
@@ -1380,13 +1397,9 @@ const ProjectDataHelpers = {
         const withSections = projects.filter(p => p.sections && p.sections.length > 0).length;
         const withOldStructure = projects.filter(p => p.extendedDescription && !p.sections).length;
         
-        const categories = {};
         const mediaTypes = { image: 0, gif: 0, video: 0, mp4: 0 };
         
         Object.entries(PROJECT_DATA).forEach(([id, project]) => {
-            const category = this.detectCategory(project, id);
-            categories[category] = (categories[category] || 0) + 1;
-            
             // Count media types
             const allMedia = this.getAllProjectMedia(project);
             allMedia.forEach(media => {
@@ -1401,7 +1414,6 @@ const ProjectDataHelpers = {
             withHeroImages,
             withSections,
             withOldStructure,
-            categories,
             mediaTypes,
             completionRate: Math.round((withHeroImages / totalProjects) * 100),
             sectionAdoptionRate: Math.round((withSections / totalProjects) * 100)
