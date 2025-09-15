@@ -385,6 +385,15 @@ class NavigationSystem {
         if (targetPage) {
             targetPage.classList.add('active');
             targetPage.scrollTop = 0;
+            
+            // Special handling for project detail page
+            if (page === 'project-detail') {
+                const projectDetailContainer = document.querySelector('.project-detail-container');
+                if (projectDetailContainer) {
+                    projectDetailContainer.scrollTop = 0;
+                }
+            }
+            
             console.log('Page activated:', page, targetPage); // Debug log
         } else {
             console.log('Page not found:', page); // Debug log
@@ -519,10 +528,33 @@ class ProjectDetailSystem {
         } else {
             this.populateProjectDetail(project);
         }
-        
+
         // Navigate to project detail page
         console.log('Navigating to project detail page'); // Debug log
         this.navigationSystem.navigateTo('project-detail');
+        
+        // Reset scroll position for project detail page
+        this.resetProjectDetailScroll();
+    }
+
+    resetProjectDetailScroll() {
+        // Reset scroll position for project detail page and its container
+        // Use a small delay to ensure the page transition is complete
+        setTimeout(() => {
+            const projectDetailPage = document.getElementById('project-detail');
+            const projectDetailContainer = document.querySelector('.project-detail-container');
+            
+            if (projectDetailPage) {
+                projectDetailPage.scrollTop = 0;
+            }
+            
+            if (projectDetailContainer) {
+                projectDetailContainer.scrollTop = 0;
+            }
+            
+            // Also reset window scroll position
+            window.scrollTo(0, 0);
+        }, 100);
     }
 
     createFallbackProject(projectId) {
