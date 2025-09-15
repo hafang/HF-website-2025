@@ -1477,6 +1477,53 @@ section#project-detail.page {
 .project-item:nth-child(5) { animation-delay: 0.5s; }
 .project-item:nth-child(6) { animation-delay: 0.6s; }
 
+/* Tablet and smaller screens - fix caption positioning */
+@media (max-width: 1024px) {
+    .media-caption {
+        position: static !important;
+        opacity: 1 !important;
+        background: var(--bg-secondary) !important;
+        color: var(--text-primary) !important;
+        padding: var(--spacing-sm) !important;
+        border-radius: 0 0 12px 12px !important;
+        margin: 0 !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+        font-size: 0.9rem !important;
+        line-height: 1.3 !important;
+        display: block !important;
+        visibility: visible !important;
+        transform: none !important;
+        z-index: auto !important;
+    }
+    
+    .media-item .media-caption {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: static !important;
+        transform: none !important;
+        z-index: auto !important;
+    }
+    
+    .media-item {
+        overflow: visible !important;
+    }
+    
+    .media-item .media-image,
+    .media-item .media-gif,
+    .media-item .media-mp4 {
+        border-radius: 12px 12px 0 0 !important;
+    }
+}
+
 /* Mobile Responsive */
 @media (max-width: 900px) {
     .header .nav .nav-links {
@@ -2084,6 +2131,34 @@ section#project-detail.page {
     align-items: start; /* Align items to top for varied heights */
 }
 
+/* Ensure media items and captions are properly contained */
+@media (max-width: 1200px) {
+    .section-media {
+        display: block !important;
+        grid-template-columns: none !important;
+    }
+    
+    .section-media .media-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto var(--spacing-lg) auto !important;
+        display: block !important;
+    }
+    
+    /* Specific fix for ALL projects to ensure proper stacking */
+    .project-detail-container .section-media {
+        display: block !important;
+        grid-template-columns: none !important;
+    }
+    
+    .project-detail-container .section-media .media-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto var(--spacing-lg) auto !important;
+        display: block !important;
+    }
+}
+
 /* Ensure media items don't stretch to fill grid cells */
 .media-item {
     display: block;
@@ -2263,10 +2338,56 @@ section#project-detail.page {
     margin: 0;
     opacity: 0;
     transition: opacity var(--transition-medium);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .media-item:hover .media-caption {
     opacity: 1;
+}
+
+/* Ensure captions are never positioned absolutely on smaller screens */
+@media (max-width: 1200px) {
+    .media-caption {
+        position: static !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+}
+
+/* Ultra-specific override to beat any other caption rules */
+@media (max-width: 1200px) {
+    .project-detail-container .section-media .media-item .media-caption,
+    .project-detail-container .media-item .media-caption,
+    .section-media .media-item .media-caption,
+    .media-item .media-caption,
+    .media-caption {
+        position: static !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        transform: none !important;
+        opacity: 1 !important;
+        background: var(--bg-secondary) !important;
+        color: var(--text-primary) !important;
+        padding: var(--spacing-sm) !important;
+        border-radius: 0 0 12px 12px !important;
+        box-sizing: border-box !important;
+        display: block !important;
+        visibility: visible !important;
+        z-index: auto !important;
+    }
 }
 
 .media-placeholder {
@@ -2305,12 +2426,45 @@ section#project-detail.page {
     }
     
     .media-caption {
-        opacity: 1;
-        position: static;
-        background: var(--bg-secondary);
-        color: var(--text-primary);
-        padding: var(--spacing-sm);
-        border-radius: 0 0 12px 12px;
+        opacity: 1 !important;
+        position: static !important;
+        background: var(--bg-secondary) !important;
+        color: var(--text-primary) !important;
+        padding: var(--spacing-sm) !important;
+        border-radius: 0 0 12px 12px !important;
+        margin: 0 !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+        font-size: 0.85rem !important;
+        line-height: 1.3 !important;
+    }
+    
+    /* Ensure captions are always visible on mobile and properly contained */
+    .media-item .media-caption {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: static !important;
+        transform: none !important;
+        z-index: auto !important;
+    }
+    
+    /* Fix any caption overflow issues on mobile */
+    .media-item {
+        overflow: visible !important;
+    }
+    
+    .media-item .media-image,
+    .media-item .media-gif,
+    .media-item .media-mp4 {
+        border-radius: 12px 12px 0 0 !important;
     }
 }
 
@@ -2346,6 +2500,37 @@ section#project-detail.page {
 /* Multiple videos side by side */
 .section-media.multiple-videos {
     grid-template-columns: 1fr 1fr !important;
+}
+
+/* Fix ALL project multiple videos to stack vertically on smaller screens */
+@media (max-width: 1200px) {
+    .project-detail-container .section-media.multiple-videos {
+        display: block !important;
+        grid-template-columns: none !important;
+    }
+    
+    .project-detail-container .section-media.multiple-videos .media-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto var(--spacing-lg) auto !important;
+        display: block !important;
+    }
+    
+    /* Also fix multiple images and mixed content for ALL projects at tablet size */
+    .project-detail-container .section-media.multiple-images {
+        display: block !important;
+        grid-template-columns: none !important;
+    }
+    
+    .project-detail-container .section-media.multiple-gifs {
+        display: block !important;
+        grid-template-columns: none !important;
+    }
+    
+    .project-detail-container .section-media.has-videos {
+        display: block !important;
+        grid-template-columns: none !important;
+    }
 }
 
 /* Single video takes full width */
@@ -2413,9 +2598,32 @@ section#project-detail.page {
     align-items: start !important;
 }
 
-/* Mobile responsive: videos stack on small screens */
+/* Mobile responsive: videos stack on small screens for ALL projects */
 @media (max-width: 768px) {
-    .section-media.multiple-videos {
+    .project-detail-container .section-media.multiple-videos {
+        display: block !important;
+        grid-template-columns: none !important;
+    }
+    
+    .project-detail-container .section-media.multiple-videos .media-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto var(--spacing-lg) auto !important;
+        display: block !important;
+    }
+    
+    /* Also fix multiple images and mixed content for ALL projects */
+    .project-detail-container .section-media.multiple-images {
+        display: block !important;
+        grid-template-columns: none !important;
+    }
+    
+    .project-detail-container .section-media.multiple-gifs {
+        display: block !important;
+        grid-template-columns: none !important;
+    }
+    
+    .project-detail-container .section-media.has-videos {
         display: block !important;
         grid-template-columns: none !important;
     }
@@ -2714,4 +2922,60 @@ section#project-detail.page {
     height: auto !important;
     max-width: 100% !important;
     object-fit: contain !important;
+}
+
+/* FINAL OVERRIDE - Ensure captions are never absolutely positioned on smaller screens */
+@media (max-width: 1200px) {
+    .project-detail-container .section-media .media-item .media-caption,
+    .project-detail-container .media-item .media-caption,
+    .section-media .media-item .media-caption,
+    .media-item .media-caption,
+    .media-caption {
+        position: static !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        transform: none !important;
+        opacity: 1 !important;
+        background: var(--bg-secondary) !important;
+        color: var(--text-primary) !important;
+        padding: var(--spacing-sm) !important;
+        border-radius: 0 0 12px 12px !important;
+        box-sizing: border-box !important;
+        display: block !important;
+        visibility: visible !important;
+        z-index: auto !important;
+    }
+}
+
+/* NUCLEAR OPTION - Ultra high specificity override */
+@media (max-width: 1200px) {
+    html body .project-detail-container .project-section .section-media .media-item .media-caption,
+    html body .project-detail-container .section-media .media-item .media-caption,
+    html body .section-media .media-item .media-caption,
+    html body .media-item .media-caption,
+    html body .media-caption {
+        position: static !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        transform: none !important;
+        opacity: 1 !important;
+        background: var(--bg-secondary) !important;
+        color: var(--text-primary) !important;
+        padding: var(--spacing-sm) !important;
+        border-radius: 0 0 12px 12px !important;
+        box-sizing: border-box !important;
+        display: block !important;
+        visibility: visible !important;
+        z-index: auto !important;
+    }
 }
