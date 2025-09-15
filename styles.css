@@ -880,7 +880,7 @@ section#project-detail.page {
 
 /* Project Detail Page */
 .project-detail-container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: var(--spacing-xl);
     padding-left: var(--spacing-xxl); /* More left padding */
@@ -889,9 +889,8 @@ section#project-detail.page {
     height: 100%;
     position: relative;
     width: 100%;
-    max-width: 1200px;
     z-index: 1000;
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+    box-shadow: none; /* Remove shadow */
 }
 
 .back-button {
@@ -1045,17 +1044,13 @@ section#project-detail.page {
 }
 
 /* Dior Constellations Section - Side by Side Layout */
-.project-detail-container[data-project="meta-dior"] .section-media:has(.media-image):has(.media-mp4) {
-    display: grid !important;
-    grid-template-columns: auto auto !important;
-    gap: var(--spacing-lg) !important;
-    max-width: 800px !important;
-    margin: 0 auto !important;
-    justify-content: center !important;
-}
 
 .project-detail-container[data-project="meta-dior"] .section-media:has(.media-image):has(.media-mp4) .media-item {
     max-width: 100% !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 .project-detail-container[data-project="meta-dior"] .section-media:has(.media-image):has(.media-mp4) .media-image,
@@ -1064,16 +1059,47 @@ section#project-detail.page {
     height: auto !important;
     max-width: 100% !important;
     object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+/* Override any conflicting general section-media rules for Dior Constellations */
+.project-detail-container[data-project="meta-dior"] .section-media:has(.media-image):has(.media-mp4):not(.has-videos) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+}
+
+/* Force Dior Constellations to use grid layout regardless of has-videos class */
+.project-detail-container[data-project="meta-dior"] .section-media:has(.media-image):has(.media-mp4) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: var(--spacing-lg) !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    justify-content: center !important;
+    align-items: start !important;
+}
+
+/* Ultra-specific override for Dior Constellations to beat all other rules */
+.project-detail-container[data-project="meta-dior"] .project-section .section-media:has(.media-image):has(.media-mp4) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: var(--spacing-lg) !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    justify-content: center !important;
+    align-items: start !important;
 }
 
 /* Fendi Project - Side by Side Layout for All Sections */
 .project-detail-container[data-project="meta-fendi"] .section-media:has(.media-image):has(.media-mp4) {
     display: grid !important;
-    grid-template-columns: auto auto !important;
+    grid-template-columns: 1fr 1fr !important;
     gap: var(--spacing-lg) !important;
     max-width: 800px !important;
     margin: 0 auto !important;
     justify-content: center !important;
+    align-items: start !important;
 }
 
 .project-detail-container[data-project="meta-fendi"] .section-media:has(.media-image):has(.media-mp4) .media-item {
@@ -1086,6 +1112,17 @@ section#project-detail.page {
     height: auto !important;
     max-width: 100% !important;
     object-fit: contain !important;
+}
+
+/* Ultra-specific override for Fendi project to beat all other rules */
+.project-detail-container[data-project="meta-fendi"] .project-section .section-media:has(.media-image):has(.media-mp4) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: var(--spacing-lg) !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    justify-content: center !important;
+    align-items: start !important;
 }
 
 /* Dream Stream Project - Side by Side Layout */
@@ -1211,8 +1248,8 @@ section#project-detail.page {
 }
 
 .project-detail-container[data-project="buck-lny"] .section-media.multiple-gifs .media-item:hover {
-    transform: translateY(-4px) !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+    transform: none !important;
+    box-shadow: 0 8px 32px var(--shadow) !important;
 }
 
 .project-detail-container[data-project="buck-lny"] .section-media.multiple-gifs .media-gif {
@@ -1228,6 +1265,16 @@ section#project-detail.page {
     display: block !important;
     max-width: 400px !important;
     margin: 0 auto !important;
+    width: fit-content !important;
+}
+
+.project-detail-container[data-project="meta-tiffany"] .section-media:has(.media-mp4[src*="tiffany_demo.mp4"]) .media-mp4 {
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
+    display: block !important;
 }
 
 /* Tokyo Olympics Project - Scale down media files */
@@ -1236,6 +1283,7 @@ section#project-detail.page {
     display: block !important;
     max-width: 1000px !important;
     margin: 0 auto !important;
+    width: fit-content !important;
 }
 
 .project-detail-container[data-project="tokyo-olympics"] .section-media:has(.media-mp4:only-child) .media-mp4 {
@@ -1244,6 +1292,8 @@ section#project-detail.page {
     max-width: 100% !important;
     object-fit: contain !important;
     border-radius: 16px !important;
+    margin: 0 auto !important;
+    display: block !important;
 }
 
 /* Single GIF sizing */
@@ -1266,6 +1316,7 @@ section#project-detail.page {
     display: block !important;
     max-width: 1000px !important;
     margin: 0 auto !important;
+    width: fit-content !important;
 }
 
 .project-detail-container[data-project="meta-fitXR"] .section-media:has(.media-mp4:only-child) .media-mp4 {
@@ -1274,6 +1325,8 @@ section#project-detail.page {
     max-width: 100% !important;
     object-fit: contain !important;
     border-radius: 16px !important;
+    margin: 0 auto !important;
+    display: block !important;
 }
 
 /* Multiple images - Side by side layout (like Tiffany videos) */
@@ -1564,13 +1617,17 @@ section#project-detail.page {
     .clickable-info {
         cursor: pointer !important;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+        touch-action: manipulation; /* Prevent double-tap zoom */
     }
     
     .clickable-thumbnail:active,
     .clickable-info:active {
-        transform: scale(0.98);
-        transition: transform 0.1s ease;
+        transform: scale(0.95); /* More noticeable feedback */
+        transition: transform 0.15s ease;
+        background-color: rgba(0, 0, 0, 0.05); /* Visual feedback */
     }
+    
+    /* Remove problematic padding that interferes with clicks */
     
     /* Fallback rule to ensure back button is visible on mobile */
     .back-button {
@@ -1775,23 +1832,29 @@ section#project-detail.page {
     /* Tiffany Demo Video Mobile - Smaller size */
     .project-detail-container[data-project="meta-tiffany"] .section-media:has(.media-mp4[src*="tiffany_demo.mp4"]) {
         max-width: 90% !important;
+        width: fit-content !important;
     }
 
     .project-detail-container[data-project="meta-tiffany"] .section-media:has(.media-mp4[src*="tiffany_demo.mp4"]) .media-mp4 {
         width: auto !important;
         height: auto !important;
         max-width: 100% !important;
+        margin: 0 auto !important;
+        display: block !important;
     }
 
     /* Tokyo Olympics Project Mobile - Larger sizes */
     .project-detail-container[data-project="tokyo-olympics"] .section-media:has(.media-mp4:only-child) {
         max-width: 95% !important;
+        width: fit-content !important;
     }
 
     .project-detail-container[data-project="tokyo-olympics"] .section-media:has(.media-mp4:only-child) .media-mp4 {
         width: auto !important;
         height: auto !important;
         max-width: 100% !important;
+        margin: 0 auto !important;
+        display: block !important;
     }
 
     .project-detail-container[data-project="tokyo-olympics"] .section-media:has(.media-gif:only-child) {
@@ -1805,12 +1868,15 @@ section#project-detail.page {
     /* Meta Fitness Project Mobile - Same as Tiffany */
     .project-detail-container[data-project="meta-fitXR"] .section-media:has(.media-mp4:only-child) {
         max-width: 90% !important;
+        width: fit-content !important;
     }
 
     .project-detail-container[data-project="meta-fitXR"] .section-media:has(.media-mp4:only-child) .media-mp4 {
         width: auto !important;
         height: auto !important;
         max-width: 100% !important;
+        margin: 0 auto !important;
+        display: block !important;
     }
 
     .project-detail-container[data-project="meta-fitXR"] .section-media:has(.media-image:nth-child(2)) {
@@ -2038,8 +2104,8 @@ section#project-detail.page {
 }
 
 .media-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px var(--shadow);
+    transform: none;
+    box-shadow: 0 8px 32px var(--shadow);
 }
 
 /* All Media Elements - Consistent Styling */
@@ -2057,11 +2123,51 @@ section#project-detail.page {
     transition: transform var(--transition-medium);
 }
 
+/* Video Centering and Sizing - Global Rules */
+.media-mp4,
+.media-video {
+    margin: 0 auto !important;
+    display: block !important;
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+/* Video Container Centering */
+.section-media:has(.media-mp4),
+.section-media:has(.media-video) {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+}
+
+/* Single Video Containers - Size to Content */
+.section-media:has(.media-mp4:only-child),
+.section-media:has(.media-video:only-child) {
+    display: block !important;
+    width: fit-content !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+}
+
+/* Video Items - Center Content */
+.media-item:has(.media-mp4),
+.media-item:has(.media-video) {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    margin: 0 auto !important;
+}
+
 .media-image:hover,
 .media-gif:hover,
 .media-video:hover,
 .media-mp4:hover {
-    transform: scale(1.02);
+    transform: none;
 }
 
 /* GIF Specific Styling */
@@ -2254,6 +2360,28 @@ section#project-detail.page {
     grid-template-columns: none !important;
 }
 
+/* Override mixed content rule specifically for Dior project */
+.project-detail-container[data-project="meta-dior"] .section-media:has(.media-image):not(.has-videos) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: var(--spacing-lg) !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    justify-content: center !important;
+    align-items: start !important;
+}
+
+/* Override mixed content rule specifically for Fendi project */
+.project-detail-container[data-project="meta-fendi"] .section-media:has(.media-image):not(.has-videos) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: var(--spacing-lg) !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    justify-content: center !important;
+    align-items: start !important;
+}
+
 /* Section media grid adjustments for all images - default fallback */
 .section-media:not(.has-videos) {
     display: block !important;
@@ -2261,6 +2389,28 @@ section#project-detail.page {
     gap: var(--spacing-lg) !important;
     margin: 0 !important;
     padding: 0 !important;
+}
+
+/* Override general section-media rules specifically for Dior project */
+.project-detail-container[data-project="meta-dior"] .section-media:not(.has-videos) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: var(--spacing-lg) !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    justify-content: center !important;
+    align-items: start !important;
+}
+
+/* Override general section-media rules specifically for Fendi project */
+.project-detail-container[data-project="meta-fendi"] .section-media:not(.has-videos) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: var(--spacing-lg) !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    justify-content: center !important;
+    align-items: start !important;
 }
 
 /* Mobile responsive: videos stack on small screens */
@@ -2492,11 +2642,10 @@ section#project-detail.page {
 
 /* Roblox Phaserider Project - Center single video */
 .project-detail-container[data-project="roblox-phaserider"] .section-media:has(.media-mp4:only-child) {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+    display: block !important;
     margin: 0 auto !important;
-    width: 100% !important;
+    width: fit-content !important;
+    max-width: 100% !important;
     text-align: center !important;
 }
 
@@ -2504,11 +2653,16 @@ section#project-detail.page {
     margin: 0 auto !important;
     display: block !important;
     text-align: center !important;
+    width: fit-content !important;
 }
 
 .project-detail-container[data-project="roblox-phaserider"] .section-media:has(.media-mp4:only-child) .media-mp4 {
     margin: 0 auto !important;
     display: block !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
 }
 
 /* Buck Altspace Project - Side by Side Layout for Images */
@@ -2538,8 +2692,8 @@ section#project-detail.page {
 }
 
 .project-detail-container[data-project="spark-ar"] .section-media.multiple-videos .media-item:hover {
-    transform: translateY(-4px) !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+    transform: none !important;
+    box-shadow: 0 8px 32px var(--shadow) !important;
 }
 
 .project-detail-container[data-project="spark-ar"] .section-media.multiple-videos .media-mp4 {

@@ -298,7 +298,7 @@ class CursorEffects {
 // Navigation System
 class NavigationSystem {
     constructor(cursorEffects = null) {
-        this.currentPage = 'home';
+        this.currentPage = 'work';
         this.cursorEffects = cursorEffects;
         this.elements = {
             pages: document.querySelectorAll('.page'),
@@ -346,8 +346,11 @@ class NavigationSystem {
 
         // Browser navigation
         window.addEventListener('popstate', (e) => {
-            this.navigateTo(e.state?.page || 'home', false);
+            this.navigateTo(e.state?.page || 'work', false);
         });
+        
+        // Initialize with work page as default
+        this.navigateTo('work', false);
     }
 
     navigateTo(page, pushState = true) {
@@ -478,18 +481,24 @@ class ProjectDetailSystem {
     bindProjectCardEvents() {
         // Use event delegation to ensure clicks work after navigation
         const workGrid = document.querySelector('.work-grid');
+        console.log('Work grid found:', workGrid); // Debug log
+        console.log('Events already bound:', this.eventsBound); // Debug log
         
         if (workGrid && !this.eventsBound) {
             // Add both click and touchstart events for better mobile support
             workGrid.addEventListener('click', this.handleProjectClick);
             workGrid.addEventListener('touchstart', this.handleProjectClick);
             this.eventsBound = true;
+            console.log('Event listeners added to work grid'); // Debug log
         }
     }
 
     handleProjectClick(e) {
+        console.log('Click event triggered:', e.type, e.target); // Debug log
+        
         // Check if clicked element or its parent is clickable
         const clickableElement = e.target.closest('.clickable-thumbnail, .clickable-info');
+        console.log('Clickable element found:', clickableElement); // Debug log
         
         if (clickableElement) {
             e.preventDefault();
@@ -501,6 +510,8 @@ class ProjectDetailSystem {
             if (projectId) {
                 this.showProjectDetail(projectId);
             }
+        } else {
+            console.log('No clickable element found for:', e.target); // Debug log
         }
     }
 

@@ -136,20 +136,6 @@ const PROJECT_DATA = {
                         caption: 'Dior Stars BTS'
                     }
                 ]
-            },
-            {
-                id: 'process',
-                title: 'Development Process',
-                content: `<p>Since our team wouldn't have access to the Paris and Seoul venues until just a couple days before launch, we used blueprints from each location to map out the effects in Buck's NYC Office weeks ahead of time. This ensured that the 3D animations in each of the four projects would be accurately mapped to the walls, ceiling height, table location, and centerpieces in each location.</p>
-                
-                <p>This process paid off once we arrived onsite -- our effects were just about perfectly mapped to the venues, and our onsite team only had to tweak a few coordinates before launch.</p>`,
-                media: [
-                    {
-                        type: 'image',
-                        src: 'images/thumbnails/dior_nyc_BTS.jpg',
-                        caption: 'NYC Office BTS'
-                    }
-                ]
             }
         ],
         credits: 'Year: 2022<br>Client: Meta x Dior<br>Role: Lead Creative Technologist, AR Developer'
@@ -1176,7 +1162,7 @@ const PROJECT_DATA = {
         heroImage: 
         {
             type: 'image',
-            src: 'images/thumbnails/snap_ls.png',
+            src: 'images/thumbnails/snap_ls.jpg',
             caption: 'Snap AR Effects'
         },
         sections: [
