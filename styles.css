@@ -105,21 +105,63 @@ body {
 }
 
 /* Page Layout */
-#work.active { overflow-y: auto; }
-#home.active, #about.active { overflow: hidden; }
+#work.active { 
+    overflow-y: auto; 
+    overflow-x: hidden;
+    background-color: var(--bg-primary);
+}
+
+#about.active { 
+    overflow-y: auto; 
+    overflow-x: hidden;
+    background-color: var(--bg-primary);
+}
+
+#home.active { 
+    overflow: hidden !important; 
+    background-color: var(--bg-primary);
+}
+
+#project-detail.active { 
+    overflow-y: auto !important; 
+    overflow-x: hidden !important;
+    background-color: var(--bg-primary);
+}
+
+#project-detail.active .back-button {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 10000 !important;
+}
 
 .main {
     padding-top: 80px;
     flex: 1;
     overflow-y: auto;
+    height: 100vh;
+    position: relative;
+    background-color: var(--bg-primary);
 }
+
+/* Home page is now fixed positioned and contained */
 
 .page {
     display: none;
-    min-height: calc(100vh - 80px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+    background-color: var(--bg-primary);
 }
 
-.page.active { display: block; }
+.page.active { 
+    display: block;
+    z-index: 10;
+}
 
 /* Custom Cursor */
 .cursor-trail {
@@ -323,21 +365,29 @@ body {
 }
 
 /* Canvas Section */
-#home { padding: var(--spacing-md); }
+#home { 
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 80px; /* Account for header */
+    box-sizing: border-box;
+}
 
 .canvas-container {
     position: relative;
-    width: 100%;
+    width: 90vw;
     max-width: 1200px;
-    height: calc(90vh - 180px);
-    margin: 0 auto;
-    margin-top: var(--spacing-lg);
+    height: 80vh;
+    margin: 0;
     padding: var(--spacing-xl);
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
     transition: all var(--transition-medium);
+    overflow: hidden; /* Prevent any content from overflowing */
 }
 
 .canvas-container:hover {
@@ -411,30 +461,35 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     margin-top: calc(var(--spacing-xl) * 2);
+    background-color: var(--bg-primary);
+    min-height: 100vh;
 }
 
 
 
 .work-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: var(--spacing-xl);
-    margin-top: var(--spacing-lg);
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: var(--spacing-lg) !important;
+    margin-top: var(--spacing-lg) !important;
+    width: 100% !important;
 }
 
 
 .project-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
     animation: fadeIn 0.6s ease-out;
     transition: all var(--transition-medium);
     transform-origin: center;
+    width: 100% !important;
+    max-width: none !important;
 }
 
 /* All projects use the same grid span for uniform sizing */
 .project-item {
-    grid-column: span 2;
+    grid-column: span 1 !important;
 }
 
 
@@ -551,6 +606,7 @@ body {
     align-items: flex-start;
     min-height: calc(100vh - 120px);
     padding-top: var(--spacing-lg);
+    background-color: var(--bg-primary);
 }
 
 .about-layout {
@@ -774,9 +830,9 @@ body {
 
 .back-button {
     position: fixed;
-    top: var(--spacing-lg);
+    top: 100px; /* Position below header */
     left: var(--spacing-lg);
-    z-index: 1000;
+    z-index: 10000;
     display: none; /* Hidden by default */
     align-items: center;
     gap: var(--spacing-xs);
@@ -797,7 +853,9 @@ body {
 
 /* Show back button only on project detail page */
 #project-detail .back-button {
-    display: flex;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .back-button:hover {
@@ -1348,15 +1406,25 @@ body {
     }
     
     .main { padding-top: calc(95px + env(safe-area-inset-top)); }
-    .page { min-height: calc(100vh - 95px - env(safe-area-inset-top)); }
     
-    #about { min-height: calc(100vh - 95px - env(safe-area-inset-top)); }
-    #home { padding: var(--spacing-md); }
+    /* Mobile pages are now fixed positioned and contained */
+    
+    #home { 
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: calc(95px + env(safe-area-inset-top));
+        box-sizing: border-box;
+    }
     
     .canvas-container {
-        width: 100%;
-        height: calc(90vh - 144px - env(safe-area-inset-top));
+        width: 95vw;
+        height: 75vh;
         border-radius: 12px;
+        margin: 0;
+        padding: var(--spacing-md);
     }
     
     .particle-canvas { border-radius: 12px; }
@@ -1367,19 +1435,82 @@ body {
     .work-container,
     .about-container { padding: var(--spacing-md); }
     
-    .back-button {
-        top: var(--spacing-md);
-        left: var(--spacing-md);
-        right: var(--spacing-md);
-        width: auto;
-        justify-content: center;
-        padding: var(--spacing-sm) var(--spacing-lg);
-        font-size: 0.95rem;
+    #project-detail .back-button {
+        top: 120px !important; /* Position below mobile header */
+        left: var(--spacing-md) !important;
+        right: var(--spacing-md) !important;
+        width: auto !important;
+        justify-content: center !important;
+        padding: var(--spacing-sm) var(--spacing-lg) !important;
+        font-size: 0.95rem !important;
+        display: flex !important; /* Ensure back button is visible on mobile */
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 9999 !important;
     }
     
-    .project-detail-content {
-        padding-top: 70px; /* Reduced space for mobile floating back button */
+    /* Hide custom cursor on mobile and restore default cursor */
+    body {
+        cursor: auto !important;
     }
+    
+    .cursor-trail {
+        display: none !important;
+    }
+    
+    /* Add mobile-specific visual feedback for clickable elements */
+    .clickable-thumbnail,
+    .clickable-info {
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    .clickable-thumbnail:active,
+    .clickable-info:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+    
+    /* Fallback rule to ensure back button is visible on mobile */
+    .back-button {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Global fallback to ensure back button is always visible when project-detail page exists */
+#project-detail .back-button,
+#project-detail.active .back-button,
+.page.active #project-detail .back-button {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 10000 !important;
+    position: fixed !important;
+    top: 100px !important;
+    left: var(--spacing-lg) !important;
+}
+
+/* Force work grid to display properly on desktop */
+#work .work-grid,
+#work.active .work-grid,
+.page.active #work .work-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: var(--spacing-lg) !important;
+    width: 100% !important;
+}
+
+#work .project-item,
+#work.active .project-item,
+.page.active #work .project-item {
+    grid-column: span 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
     
     
     .about-layout {
@@ -1604,14 +1735,28 @@ body {
         font-size: 1rem;
         text-align: left;
     }
+
+/* Desktop: 3-column grid for screens wider than 1024px */
+@media (min-width: 1025px) {
+    .work-grid { 
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: var(--spacing-lg) !important;
+    }
+    
+    .project-item {
+        grid-column: span 1 !important;
+        width: 100% !important;
+        max-width: none !important;
+    }
 }
 
-@media (max-width: 1024px) and (min-width: 769px) {
-    .work-grid { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1024px) and (min-width: 901px) {
+    .work-grid { grid-template-columns: repeat(2, 1fr); }
     
-    /* Tablet: all projects take 2 columns for uniform sizing */
+    /* Large tablet: all projects take 1 column for uniform sizing */
     .project-item {
-        grid-column: span 2;
+        grid-column: span 1;
     }
 }
 

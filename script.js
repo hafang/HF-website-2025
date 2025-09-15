@@ -221,9 +221,22 @@ class CursorEffects {
         const offsetX = addRandomOffset ? (Math.random() - 0.5) * 20 : 0;
         const offsetY = addRandomOffset ? (Math.random() - 0.5) * 20 : 0;
         
-        sparkle.style.left = `${x + offsetX}px`;
-        sparkle.style.top = `${y + offsetY}px`;
-        document.body.appendChild(sparkle);
+        // Check if we're in the canvas container and position relative to it
+        if (this.isWithinCanvas(x, y)) {
+            const canvasRect = this.canvasContainer.getBoundingClientRect();
+            const relativeX = x - canvasRect.left + offsetX;
+            const relativeY = y - canvasRect.top + offsetY;
+            
+            sparkle.style.position = 'absolute';
+            sparkle.style.left = `${relativeX}px`;
+            sparkle.style.top = `${relativeY}px`;
+            this.canvasContainer.appendChild(sparkle);
+        } else {
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = `${x + offsetX}px`;
+            sparkle.style.top = `${y + offsetY}px`;
+            document.body.appendChild(sparkle);
+        }
     }
 
     isWithinCanvas(x, y) {
@@ -372,6 +385,9 @@ class NavigationSystem {
         if (targetPage) {
             targetPage.classList.add('active');
             targetPage.scrollTop = 0;
+            console.log('Page activated:', page, targetPage); // Debug log
+        } else {
+            console.log('Page not found:', page); // Debug log
         }
     }
 
@@ -455,7 +471,9 @@ class ProjectDetailSystem {
         const workGrid = document.querySelector('.work-grid');
         
         if (workGrid && !this.eventsBound) {
+            // Add both click and touchstart events for better mobile support
             workGrid.addEventListener('click', this.handleProjectClick);
+            workGrid.addEventListener('touchstart', this.handleProjectClick);
             this.eventsBound = true;
         }
     }
@@ -469,6 +487,8 @@ class ProjectDetailSystem {
             const projectItem = clickableElement.closest('.project-item');
             const projectId = projectItem?.dataset.project;
             
+            console.log('Project clicked:', projectId); // Debug log
+            
             if (projectId) {
                 this.showProjectDetail(projectId);
             }
@@ -476,7 +496,15 @@ class ProjectDetailSystem {
     }
 
     bindBackButton() {
+        console.log('Back button element:', this.elements.backButton); // Debug log
+        
         this.elements.backButton?.addEventListener('click', () => {
+            this.navigationSystem.navigateTo('work');
+        });
+        
+        // Add touch support for mobile
+        this.elements.backButton?.addEventListener('touchstart', (e) => {
+            e.preventDefault();
             this.navigationSystem.navigateTo('work');
         });
     }
@@ -493,6 +521,7 @@ class ProjectDetailSystem {
         }
         
         // Navigate to project detail page
+        console.log('Navigating to project detail page'); // Debug log
         this.navigationSystem.navigateTo('project-detail');
     }
 
