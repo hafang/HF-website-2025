@@ -1043,6 +1043,65 @@ section#project-detail.page {
     background: transparent;
 }
 
+/* Takeoff Project - Hero image adjustments */
+
+/* Takeoff Project - Hero image adjustments - Override ALL conflicting rules */
+.project-detail-container[data-project="yugalabs-takeoff"] .hero-image,
+.project-detail-container[data-project="yugalabs-takeoff"] .project-hero-image .hero-image {
+    aspect-ratio: 2/1 !important; /* Wide aspect ratio to show full image without cropping */
+    object-fit: fit !important; /* Show full image without cropping */
+    object-position: center !important;
+    max-height: 400px !important; /* Reasonable height */
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 12px !important;
+}
+
+/* Center all media elements for Takeoff project - Override ALL general section-media rules */
+.project-detail-container[data-project="yugalabs-takeoff"] .section-media,
+.project-detail-container[data-project="yugalabs-takeoff"] .section-media:not(.has-videos),
+.project-detail-container[data-project="yugalabs-takeoff"] .section-media:has(.media-image),
+.project-detail-container[data-project="yugalabs-takeoff"] .section-media:has(.media-gif),
+.project-detail-container[data-project="yugalabs-takeoff"] .section-media:has(.media-mp4) {
+    display: block !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: var(--spacing-lg) auto !important;
+    grid-template-columns: none !important;
+    gap: var(--spacing-lg) !important;
+}
+
+.project-detail-container[data-project="yugalabs-takeoff"] .media-item {
+    margin: 0 auto !important;
+    display: block !important;
+    text-align: center !important;
+    width: fit-content !important;
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+.project-detail-container[data-project="yugalabs-takeoff"] .media-image,
+.project-detail-container[data-project="yugalabs-takeoff"] .media-gif,
+.project-detail-container[data-project="yugalabs-takeoff"] .media-mp4 {
+    margin: 0 auto !important;
+    display: block !important;
+    text-align: center !important;
+}
+
+/* Force center all content in Takeoff project */
+.project-detail-container[data-project="yugalabs-takeoff"] {
+    text-align: center !important;
+}
+
+.project-detail-container[data-project="yugalabs-takeoff"] .project-section {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
 /* Dior Constellations Section - Side by Side Layout */
 
 .project-detail-container[data-project="meta-dior"] .section-media:has(.media-image):has(.media-mp4) .media-item {
@@ -2690,6 +2749,7 @@ section#project-detail.page {
     overflow: hidden;
 }
 
+
 .slides-container {
     position: absolute;
     top: 0;
@@ -2807,8 +2867,15 @@ section#project-detail.page {
 
 /* Mobile slideshow adjustments */
 @media (max-width: 768px) {
-    .slideshow-wrapper {
-        padding-bottom: 75%; /* 4:3 aspect ratio for mobile */
+    .slideshow-wrapper:not(.project-detail-container[data-project="yugalabs-takeoff"] .slideshow-wrapper) {
+        padding-bottom: 75%; /* 4:3 aspect ratio for mobile - exclude Takeoff */
+    }
+    
+    /* Takeoff project mobile adjustments - width handled by clamp above */
+    .takeoff-slideshow-wrapper {
+        height: auto !important;
+        padding-bottom: 0 !important; /* ensure aspect-ratio controls height */
+        aspect-ratio: 9/16 !important;
     }
     
     .slideshow-controls {
@@ -2864,13 +2931,38 @@ section#project-detail.page {
     width: fit-content !important;
 }
 
-.project-detail-container[data-project="roblox-phaserider"] .section-media:has(.media-mp4:only-child) .media-mp4 {
-    margin: 0 auto !important;
-    display: block !important;
-    width: auto !important;
-    height: auto !important;
+    .project-detail-container[data-project="roblox-phaserider"] .section-media:has(.media-mp4:only-child) .media-mp4 {
+        width: auto !important;
+        height: auto !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+    }
+
+/* Takeoff Project - Clean Slideshow Styling */
+.takeoff-slideshow-container {
+    /* Keep consistent perceived size across breakpoints */
+    width: clamp(320px, 60vw, 760px) !important;
     max-width: 100% !important;
+    margin: 0 auto !important;
+}
+
+.takeoff-slideshow-wrapper {
+    /* Force 9:16 on top of the base .slideshow-wrapper (which is 16:9) */
+    height: auto !important;
+    padding-bottom: 0 !important;
+    aspect-ratio: 9/16 !important;
+    width: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 16px !important;
+}
+
+.takeoff-slideshow-wrapper .slide .media-image,
+.takeoff-slideshow-wrapper .slide .media-gif {
+    width: 100% !important;
+    height: 100% !important;
     object-fit: contain !important;
+    object-position: center !important;
 }
 
 /* Buck Altspace Project - Side by Side Layout for Images */

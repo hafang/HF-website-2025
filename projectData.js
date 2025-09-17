@@ -1130,25 +1130,154 @@ const PROJECT_DATA = {
     },
 
     'yugalabs-takeoff': {
-        title: 'Buck x Yuga Labs',
+        title: 'Buck x Takeoff',
         subtitle: 'Animaze, Virtual Puppetry, Virtual Production',
         description: `
         <p>
-        Coming soon...
-        </p>`,
-        heroImage: null,
-        sections: [
+        When Takeoff was getting ready to launch their app, they reached out to Buck to help them create a real-time brand avatar and create social films with it. As the lead Creative Technologist, I helped Buck and Takeoff create a real-time brand avatar and 6 different social films.
+        </p>
+        <p>
+        Join Takeoff <a href="https://join.takeoff.app/" target="_blank">here</a>!
+        </p>
+        `,
+        heroImage: [
             {
-                id: 'replace-me',
-                title: 'Coming Soon...',
-                content: `
-                <p>
-                Coming soon...
-                </p>`,
-                media: []
+                type: 'image',
+                src: 'images/thumbnails/takeoff_long.png',
+                caption: ''
             }
         ],
-        credits: 'Year: 2025<br>Client: Yuga Labs<br>Role: Lead Creative Technologist'
+        sections: [
+            {
+                id: 'real-time-puppet',
+                title: 'New Softwares and a Real-time Puppet',
+                content: `
+                <p>
+                To help the client post timely updates in the fast-moving crypto space, we developed a puppet toolkit designed for ease of use by a small team. 
+                </p>
+
+                <p>
+                With the tight timeline we had, we could not afford to spend time developing a comprehensive real-time puppet system. Instead, after some thorough research and experimentation, we landed on Animaze. 
+                Animaze is an AI-driven software that, despite some early rigging and animation challenges, offered an intuitive interface ideal for real-time performance.
+                </p>
+                
+                <p>
+                In addition to face-tracking for dialogue, Animaze includes triggerable animations to support more expressive, well-rounded performances. The puppeteer also has full control over camera placement to suit their scene.
+                </p>
+
+                <p>
+                So by combining face-tracking, triggerable animations and camera placement, we were able to create a real-time puppet that could perform a variety of different scenes.
+                </p>
+
+                <p>
+                Visit Takeoff's personal page <a href="https://www.tiktok.com/@takeofftheapp" target="_blank">TikTok</a> to see the social films in action.
+
+                `
+                ,
+                media: [
+
+                ]
+            },
+            {
+                id: 'rigging',
+                title: 'Rigging the Puppet',
+                content: `
+                <p>
+                The rigging process was… tricky.
+                </p>
+
+                <p>
+                Since Animaze was still a new software, we had to reverse-engineer Animaze’s own avatars to determine how their blendshapes and rigging worked together. We worked with Animaze's team to get some questions answered, 
+                but ultimately had to figure it out ourselves.
+                </p>
+
+                <p>
+                With perseverance and some late nights, we were able to use the Animaze Editor to import and customize the little guy to 
+                our liking.
+                </p>
+                `
+                ,
+                media: [
+                    {
+                        type: 'mp4',
+                        src: 'images/takeoff/takeoff_rigTest.mp4',
+                        caption: 'Early Rig Test in Animaze Desktop'
+                    }
+                ]
+            },
+            {
+                id: 'physics',
+                title: 'Antenna Physics',
+                content: `
+                <p>
+                To bring even more personality and natural movement to our character we added custom physics to the antenna on its head. We developed an inverted pendulum–based system to give the antenna a satisfying, life-like bounce.
+                </p>
+
+                <p>
+                Animaze's physics engine is still at its early stages, but I was able to adapt and use a series of sphere colliders placed along the antenna, each with progressively varied spring settings. Colliders are stiffer near the base for stability, and looser toward the tip for more wiggle.
+                </p>
+
+                <p>
+                The antenna naturally leans to one side. Because why not?
+                </p>
+                `,
+                media: [
+                    {
+                        type: 'gif',
+                        src: 'images/takeoff/takeoff_antenna.gif',
+                        caption: 'Antenna Physics in Animaze Editor'
+                    }
+                ]
+            },
+            {
+                id: 'live-performance',
+                title: 'Live Performance with the Puppet',
+                content: `
+                <p>Animaze Desktop is where we added the final polish. Here’s the fun stuff.
+                </p>
+
+                <p>
+                We could fine-tune the look with custom backgrounds, scene lighting, and camera angles. Most importantly, we could turn on the webcam and enable facial tracking to see the avatar come alive in real-time. 
+                </p>
+
+                <p>
+                From there our performers would follow the script and puppeteer the character, and ultimately used OBS to capture the live performance.
+                </p>
+
+                `
+                ,
+                media: [
+                    {
+                        type: 'gif',
+                        src: 'images/takeoff/takeoff_production.gif',
+                        caption: ''
+                    }
+                ]
+            },
+            {
+                id: 'social-films',
+                title: 'Social Films',
+                content: `
+                <p>
+                We created 15 social films to help the client launch their new crypto app.
+                </p>
+
+                <p>
+                Of those, several reached hundreds of thousands of views on TikTok. A testament to the quality of the content and our hard work.
+                I am always proud to offer technical solutions to best represent our clients' brand and push the limits of the latest technologies.
+                </p>
+                `
+                ,
+                media: [
+                    {
+                        type: 'image',
+                        src: 'images/thumbnails/takeoff_tiktok.png',
+                        caption: ''
+                    }
+                ]
+            }
+        ],
+        credits: 'Year: 2025<br>Client: Takeoff<br>Role: Lead Creative Technologist'
     },
 
     'snap-ar': {

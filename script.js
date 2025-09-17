@@ -885,6 +885,14 @@ class ProjectDetailSystem {
     }
 
     createSlideshow(mediaItems) {
+        const projectContainer = document.querySelector('.project-detail-container[data-project="yugalabs-takeoff"]');
+        
+        // Create custom slideshow for Takeoff project
+        if (projectContainer) {
+            return this.createTakeoffSlideshow(mediaItems);
+        }
+        
+        // Standard slideshow for other projects
         const slideshowContainer = document.createElement('div');
         slideshowContainer.className = 'slideshow-container';
         
@@ -946,6 +954,150 @@ class ProjectDetailSystem {
         
         // Add event listeners
         this.addSlideshowEventListeners(slideshowContainer, mediaItems.length);
+        
+        return slideshowContainer;
+    }
+
+    createTakeoffSlideshow(mediaItems) {
+        const slideshowContainer = document.createElement('div');
+        slideshowContainer.className = 'slideshow-container takeoff-slideshow-container';
+        
+        // Create slideshow wrapper with fixed aspect ratio
+        const slideshowWrapper = document.createElement('div');
+        slideshowWrapper.className = 'slideshow-wrapper takeoff-slideshow-wrapper';
+        
+        // Create slides container
+        const slidesContainer = document.createElement('div');
+        slidesContainer.className = 'slides-container';
+        slidesContainer.style.position = 'absolute';
+        slidesContainer.style.top = '0';
+        slidesContainer.style.left = '0';
+        slidesContainer.style.width = '100%';
+        slidesContainer.style.height = '100%';
+        slidesContainer.style.display = 'flex';
+        slidesContainer.style.alignItems = 'center';
+        slidesContainer.style.justifyContent = 'center';
+        
+        // Create slides
+        mediaItems.forEach((mediaItem, index) => {
+            const slide = document.createElement('div');
+            slide.className = `slide ${index === 0 ? 'active' : ''}`;
+            slide.setAttribute('data-slide', index);
+            slide.style.position = 'absolute';
+            slide.style.top = '0';
+            slide.style.left = '0';
+            slide.style.width = '100%';
+            slide.style.height = '100%';
+            slide.style.opacity = index === 0 ? '1' : '0';
+            slide.style.transition = 'opacity 0.5s ease-in-out';
+            slide.style.display = 'flex';
+            slide.style.alignItems = 'center';
+            slide.style.justifyContent = 'center';
+            slide.style.overflow = 'hidden';
+            
+            const mediaElement = this.createMediaElement(mediaItem);
+            mediaElement.style.width = '100%';
+            mediaElement.style.height = '100%';
+            mediaElement.style.objectFit = 'contain';
+            mediaElement.style.objectPosition = 'center';
+            slide.appendChild(mediaElement);
+            slidesContainer.appendChild(slide);
+        });
+        
+        slideshowWrapper.appendChild(slidesContainer);
+        
+        // Create navigation controls
+        const controls = document.createElement('div');
+        controls.className = 'slideshow-controls';
+        controls.style.position = 'absolute';
+        controls.style.bottom = '20px';
+        controls.style.left = '50%';
+        controls.style.transform = 'translateX(-50%)';
+        controls.style.display = 'flex';
+        controls.style.alignItems = 'center';
+        controls.style.gap = 'var(--spacing-md)';
+        controls.style.background = 'rgba(0, 0, 0, 0.7)';
+        controls.style.padding = 'var(--spacing-sm) var(--spacing-md)';
+        controls.style.borderRadius = '25px';
+        controls.style.backdropFilter = 'blur(10px)';
+        controls.style.zIndex = '10';
+        controls.style.opacity = '0';
+        controls.style.transition = 'opacity 0.3s ease';
+        
+        // Previous button
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'slideshow-btn prev-btn';
+        prevBtn.innerHTML = '‹';
+        prevBtn.setAttribute('aria-label', 'Previous image');
+        
+        // Next button
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'slideshow-btn next-btn';
+        nextBtn.innerHTML = '›';
+        nextBtn.setAttribute('aria-label', 'Next image');
+        
+        // Dots indicator
+        const dotsContainer = document.createElement('div');
+        dotsContainer.className = 'slideshow-dots';
+        
+        mediaItems.forEach((_, index) => {
+            const dot = document.createElement('button');
+            dot.className = `dot ${index === 0 ? 'active' : ''}`;
+            dot.setAttribute('data-slide', index);
+            dotsContainer.appendChild(dot);
+        });
+        
+        controls.appendChild(prevBtn);
+        controls.appendChild(dotsContainer);
+        controls.appendChild(nextBtn);
+        
+        slideshowWrapper.appendChild(controls);
+        slideshowContainer.appendChild(slideshowWrapper);
+        
+        // Add hover effect for controls
+        slideshowContainer.addEventListener('mouseenter', () => {
+            controls.style.opacity = '1';
+        });
+        
+        slideshowContainer.addEventListener('mouseleave', () => {
+            controls.style.opacity = '0';
+        });
+        
+        // Add navigation functionality
+        let currentSlide = 0;
+        
+        const showSlide = (index) => {
+            const slides = slideshowWrapper.querySelectorAll('.slide');
+            const dots = slideshowWrapper.querySelectorAll('.dot');
+            
+            slides.forEach((slide, i) => {
+                slide.style.opacity = i === index ? '1' : '0';
+                slide.classList.toggle('active', i === index);
+            });
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            
+            currentSlide = index;
+        };
+        
+        prevBtn.addEventListener('click', () => {
+            const newIndex = currentSlide > 0 ? currentSlide - 1 : mediaItems.length - 1;
+            showSlide(newIndex);
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            const newIndex = currentSlide < mediaItems.length - 1 ? currentSlide + 1 : 0;
+            showSlide(newIndex);
+        });
+        
+        dotsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('dot')) {
+                const index = parseInt(e.target.getAttribute('data-slide'));
+                showSlide(index);
+            }
+        });
         
         return slideshowContainer;
     }
